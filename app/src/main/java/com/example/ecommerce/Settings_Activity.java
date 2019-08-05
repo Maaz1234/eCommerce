@@ -43,7 +43,7 @@ public class Settings_Activity extends AppCompatActivity {
     private String myUrl = "";
     private StorageTask uploadTask;
     private StorageReference storageProfilePictureRef;
-    private String checker;
+    private String checker = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,7 +206,6 @@ public class Settings_Activity extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 startActivity(new Intent(Settings_Activity.this, HomeActivity.class));
                                 Toast.makeText(Settings_Activity.this,"Profile Info updated successfully",Toast.LENGTH_SHORT).show();
-
                                 finish();
                             }
                             else
