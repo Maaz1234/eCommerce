@@ -82,6 +82,8 @@ public class HomeActivity extends AppCompatActivity
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
         userNameTextView.setText(Prevalent.currentOnlineUser.getName());
+        /*userNameTextView.setText(Prevalent.currentOnlineUser.getName());*/
+        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
 
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
@@ -102,12 +104,21 @@ public class HomeActivity extends AppCompatActivity
         FirebaseRecyclerAdapter<Product, ProductViewHolder> adapter = new FirebaseRecyclerAdapter<Product, ProductViewHolder>(options)
         {
             @Override
-            protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull Product model)
+            protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull final Product model)
             {
                 holder.txtProductName.setText(model.getPname());
                 holder.txtProductDescription.setText(model.getDescription());
                 holder.txtProductPrice.setText("Price = " + model.getPrice());
                 Picasso.get().load(model.getImage()).into(holder.imageView);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                        intent.putExtra("pid",model.getPid());
+                        startActivity(intent);
+                    }
+                });
             }
 
             @NonNull
@@ -171,7 +182,7 @@ public class HomeActivity extends AppCompatActivity
         else if (id == R.id.nav_settings)
         {
             Intent intent = new Intent(HomeActivity.this, Settings_Activity.class);
-            startActivity(intent);  
+            startActivity(intent);
         }
         else if (id == R.id.nav_logout)
         {
