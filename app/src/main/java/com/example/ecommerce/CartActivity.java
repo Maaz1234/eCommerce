@@ -1,22 +1,28 @@
 package com.example.ecommerce;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ecommerce.Model.Cart;
 import com.example.ecommerce.Prevalent.Prevalent;
 import com.example.ecommerce.ViewHolder.CartViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -59,11 +65,64 @@ public class CartActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
                 = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull Cart model)
+            protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull final Cart model)
             {
                 holder.txtProductQuantity.setText("Quantity = "+ model.getQuantity());
                 holder.txtProductPrice.setText("Price "+model.getPrice()+ "Rs.");
                 holder.txtProductName.setText(model.getPname());
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        CharSequence options[] = new CharSequence[]
+                                {
+                                    "Edit",
+                                    "Remove"
+                                };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
+                        builder.setTitle("Cart Optionss:");
+
+                        builder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i)
+                            {
+                                if (i == 0)
+                                {
+                                    Intent intent = new Intent(CartActivity.this, ProductDetailsActivity.class);
+                                    intent.putExtra("pid",model.getPid());
+                                    startActivity(intent);
+                                }
+
+                                if (i == 1)
+                                {
+                                       cartListRef.child("User View")
+                                               .child(Prevalent.currentOnlineUser.getPhone())
+                                               .child("Products")
+                                               .child(model.getPid())
+                                               .removeValue()
+                                               .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                   @Override
+                                                   public void onComplete(@NonNull Task<Void> task)
+                                                   {
+                                                       if(task.isSuccessful())
+                                                       {
+                                                           Toast.makeText(CartActivity.this,"Item removed successfully!",Toast.LENGTH_SHORT).show();
+
+                                                           Intent intent = new Intent(CartActivity.this, HomeActivity.class);
+                                                           intent.putExtra("pid",model.getPid());
+                                                           startActivity(intent);
+                                                       }
+                                                   }
+                                               });
+                                }
+                            }
+                        });
+                        builder.show();
+
+                    }
+                });
+
             }
 
             @NonNull
