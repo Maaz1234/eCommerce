@@ -89,6 +89,27 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
                             loadingBar.dismiss();
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                            Prevalent.currentOnlineUser = userData;
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            Toast.makeText(MainActivity.this,"Password is incorrect.",Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+                        }
+                    }
+                }
+                else if (dataSnapshot.child("Admins").child(phone).exists())
+                {
+                    Users adminData = dataSnapshot.child("Admins").child(phone).getValue(Users.class);
+
+                    if(adminData.getPhone().equals(phone))
+                    {
+                        if (adminData.getPassword().equals(password))
+                        {
+                            Toast.makeText(MainActivity.this, "Welcome Admin you are logged in Successfully", Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+                            Intent intent = new Intent(MainActivity.this, AdminCategoryActivity.class);
                             startActivity(intent);
                         }
                         else
