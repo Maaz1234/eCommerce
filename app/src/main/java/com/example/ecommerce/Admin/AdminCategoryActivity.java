@@ -1,13 +1,16 @@
-package com.example.ecommerce;
+package com.example.ecommerce.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.tv.TvContract;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.ecommerce.HomeActivity;
+import com.example.ecommerce.MainActivity;
+import com.example.ecommerce.R;
 
 public class AdminCategoryActivity extends AppCompatActivity {
 
@@ -78,7 +81,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         tShirts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminCategoryActivity.this,AdminAddNewProductActivity.class);
+                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
                 intent.putExtra("category", "tShirts");
                 startActivity(intent);
             }

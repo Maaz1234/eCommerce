@@ -30,6 +30,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="17sp"
                     android:textStyle="bold"
+                    android:layout_margin="10dp"
                     android:layout_alignParentStart="true"
                 />
 
@@ -102,6 +103,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/settings_full_name"
         android:hint="Address"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        />
+
+    <Button
+        android:id="@+id/security_questions_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_address"
+        android:text="Set Security Questions"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
         android:layout_margin="15dp"
         android:padding="10dp"
         />

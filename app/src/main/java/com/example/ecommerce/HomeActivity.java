@@ -3,13 +3,13 @@ package com.example.ecommerce;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.ecommerce.Admin.AdminMaintainProductsActivity;
 import com.example.ecommerce.Model.Product;
 import com.example.ecommerce.Prevalent.Prevalent;
 import com.example.ecommerce.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.view.LayoutInflater;
 import android.view.View;
