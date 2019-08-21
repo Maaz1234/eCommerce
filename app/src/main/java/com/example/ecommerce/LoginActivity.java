@@ -79,6 +79,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 LoginButton.setText("Login Admin");
+                ForgetPasswordLink.setVisibility(View.INVISIBLE);
+                chkBoxRememberMe.setVisibility(View.INVISIBLE);
                 AdminLink.setVisibility(View.INVISIBLE);
                 NotAdminLink.setVisibility(View.VISIBLE);
                 parentDBName = "Admins";
@@ -91,6 +93,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 LoginButton.setText("Login");
+                ForgetPasswordLink.setVisibility(View.VISIBLE);
+                chkBoxRememberMe.setVisibility(View.VISIBLE);
                 AdminLink.setVisibility(View.VISIBLE);
                 NotAdminLink.setVisibility(View.INVISIBLE);
                 parentDBName = "Users";

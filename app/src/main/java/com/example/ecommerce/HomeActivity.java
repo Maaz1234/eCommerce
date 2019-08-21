@@ -61,7 +61,6 @@ public class HomeActivity extends AppCompatActivity
             type = getIntent().getExtras().get("Admin").toString();
         }
 
-
         ProductRef = FirebaseDatabase.getInstance().getReference().child("Products");
 
         Paper.init(this);

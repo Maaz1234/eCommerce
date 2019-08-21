@@ -107,7 +107,7 @@ public class CartActivity extends AppCompatActivity {
                                     "Remove"
                                 };
                         AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
-                        builder.setTitle("Cart Optionss:");
+                        builder.setTitle("Cart Options:");
 
                         builder.setItems(options, new DialogInterface.OnClickListener() {
                             @Override
