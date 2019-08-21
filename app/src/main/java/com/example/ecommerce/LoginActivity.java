@@ -52,9 +52,11 @@ public class LoginActivity extends AppCompatActivity {
         chkBoxRememberMe = (CheckBox) findViewById(R.id.remember_me_chkb);
         Paper.init(this);
 
-        LoginButton.setOnClickListener(new View.OnClickListener() {
+        LoginButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 LoginUser();
             }
         });
@@ -74,7 +76,8 @@ public class LoginActivity extends AppCompatActivity {
 
         AdminLink.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 LoginButton.setText("Login Admin");
                 AdminLink.setVisibility(View.INVISIBLE);
                 NotAdminLink.setVisibility(View.VISIBLE);
@@ -82,9 +85,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        NotAdminLink.setOnClickListener(new View.OnClickListener() {
+        NotAdminLink.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 LoginButton.setText("Login");
                 AdminLink.setVisibility(View.VISIBLE);
                 NotAdminLink.setVisibility(View.INVISIBLE);
